@@ -13,7 +13,7 @@ import build_demo
 class ReconstructedPublicationTests(unittest.TestCase):
     def test_exact_reconstruction(self):
         rebuilt = build_demo.build()
-        committed = (HERE / "demo" / "index.html").read_bytes()
+        committed = (HERE / "index.html").read_bytes()
         self.assertEqual(rebuilt, committed)
         self.assertEqual(hashlib.sha256(rebuilt).hexdigest(),
                          build_demo.EXPECTED_SHA256)
@@ -26,13 +26,13 @@ class ReconstructedPublicationTests(unittest.TestCase):
         self.assertIn('"standing"', payload)
 
     def test_nondefault_output_does_not_change_committed_html(self):
-        before = (HERE / "demo" / "index.html").read_bytes()
+        before = (HERE / "index.html").read_bytes()
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "nested" / "index.html"
             output.parent.mkdir(parents=True)
             output.write_bytes(build_demo.build())
             self.assertEqual(output.read_bytes(), before)
-        self.assertEqual(before, (HERE / "demo" / "index.html").read_bytes())
+        self.assertEqual(before, (HERE / "index.html").read_bytes())
 
     def test_tampering_fails_validation(self):
         import json
