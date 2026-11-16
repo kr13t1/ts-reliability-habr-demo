@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "source"
 TEMPLATE = SOURCE / "template.html"
 PAYLOAD = SOURCE / "payload.json"
-DEFAULT_OUT = ROOT / "demo" / "index.html"
+DEFAULT_OUT = ROOT / "index.html"
 PLACEHOLDER = "__EMBEDDED_WISDM_PAYLOAD_JSON__"
 EXPECTED_SHA256 = "9d45b2f740415f19d8857beafa0cffd6150748571eb94841744cb085c200a684"
 
