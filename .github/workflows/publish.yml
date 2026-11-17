@@ -27,10 +27,16 @@ jobs:
           python build_demo.py --check
           python -m unittest discover -p 'test_*.py' -v
           echo "9d45b2f740415f19d8857beafa0cffd6150748571eb94841744cb085c200a684  index.html" | sha256sum -c -
+      - name: Stage only public site files
+        run: |
+          mkdir -p _site/figures
+          cp index.html _site/index.html
+          cp figures/overview.svg figures/boundary.svg _site/figures/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
+          retention-days: 7
 
   deploy:
     environment:
@@ -40,7 +46,5 @@ jobs:
     needs: verify
     steps:
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - id: deployment
         uses: actions/deploy-pages@v4
