@@ -63,3 +63,24 @@ jobs:
       - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify anonymously served release bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=https://kr13t1.github.io/ts-reliability-habr-demo/
+          expected=a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1
+          for attempt in $(seq 1 12); do
+            if curl --fail --silent --show-error --location --max-time 20 "${base}?release=${GITHUB_SHA}" -o /tmp/public-index.html && echo "$expected  /tmp/public-index.html" | sha256sum -c -; then
+              for figure in overview boundary; do
+                curl --fail --silent --show-error --location --max-time 20 "${base}figures/$figure.svg" -o "/tmp/$figure.svg"
+                grep -q '<svg' "/tmp/$figure.svg"
+              done
+              curl --fail --silent --show-error --location --max-time 30 'https://github.com/kr13t1/ts-reliability-habr-demo/archive/fff544b924637fc1e9be140b3ac19f7d7ee01918.zip' -o /tmp/public-source.zip
+              unzip -tq /tmp/public-source.zip
+              echo 'PASS anonymous HTTPS release HTML checksum, both figures and pinned public source archive'
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
