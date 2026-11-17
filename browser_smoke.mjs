@@ -13,7 +13,7 @@ try {
  page.on('request',r=>{if(/^https?:/i.test(r.url()))external.push(r.url());});
  await page.goto(pathToFileURL(path.resolve('index.html')).href);
  await page.locator('#guidePlotWrap svg path').first().waitFor({state:'visible'});
- assert.equal(await page.locator('#guideProgress').innerText(),'Шаг 1 из 4');
+ assert.equal(await page.locator('#guideProgress').textContent(),'Шаг 1 из 4');
  assert.equal(await page.locator('#guideBack').isDisabled(),true);
  assert.equal(await page.locator('#advanced').getAttribute('open'),null);
  assert.equal(await page.locator('#guidePlotWrap path').count(),1);
@@ -24,13 +24,13 @@ try {
  await page.locator('#guideNext').click();
  assert.match(await page.locator('#guideResult').innerText(),/1191 из 1191/);
  await page.locator('#guideNext').click();
- assert.match(await page.locator('#guidePlotWrap').innerText(),/1190: лишняя отметка/);
+ assert.match(await page.locator('#guidePlotWrap').textContent(),/1190: лишняя отметка/);
  await page.screenshot({path:'browser-evidence/03-boundary.png',fullPage:true});
  await page.locator('#guideBack').click();
- assert.equal(await page.locator('#guideProgress').innerText(),'Шаг 3 из 4');
+ assert.equal(await page.locator('#guideProgress').textContent(),'Шаг 3 из 4');
  await page.locator('#guideNext').click();
  await page.locator('#guideNext').click();
- assert.equal(await page.locator('#guideProgress').innerText(),'Шаг 1 из 4');
+ assert.equal(await page.locator('#guideProgress').textContent(),'Шаг 1 из 4');
  await page.locator('#advanced summary').click();
  assert.equal(await page.locator('#nAssigned').innerText(),'1191');
  assert.equal(await page.locator('#nPredicted').innerText(),'1192');
