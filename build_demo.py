@@ -1,6 +1,6 @@
 """Rebuild the fixed offline publication HTML from versioned presentation inputs.
 
-Reconstructed 2026-11-16 from the already-published PR #30 HTML blob.
+Guided UI revision 2026-11-17 from the audited PR #30 payload; pending delta audit.
 This is NOT the original historical raw-WISDM build_demo.py and does not
 assert independent authentication of the WISDM raw recording.
 """
@@ -18,7 +18,7 @@ TEMPLATE = SOURCE / "template.html"
 PAYLOAD = SOURCE / "payload.json"
 DEFAULT_OUT = ROOT / "index.html"
 PLACEHOLDER = "__EMBEDDED_WISDM_PAYLOAD_JSON__"
-EXPECTED_SHA256 = "9d45b2f740415f19d8857beafa0cffd6150748571eb94841744cb085c200a684"
+EXPECTED_SHA256 = "a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1"
 
 
 def digest(data: bytes) -> str:
@@ -83,7 +83,7 @@ def build() -> bytes:
         raise ValueError("Template must have precisely one data marker")
     rendered = template.replace(marker, raw)
     if digest(rendered) != EXPECTED_SHA256:
-        raise ValueError("Reconstructed HTML differs from audited snapshot")
+        raise ValueError("Reconstructed HTML differs from pinned guided snapshot")
     return rendered
 
 

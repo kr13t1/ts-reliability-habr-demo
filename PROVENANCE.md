@@ -1,3 +1,5 @@
+# Historical provenance (v1 snapshot)
+
 # Происхождение автономной демонстрации
 
 **Объект:** `demo/index.html`, автономный интерактивный прототип (не G2.4 upstream viewer и не научный эксперимент). Фактические входы сверены при локальной сборке 2026-11-15, но независимого 05-аудита публикационной версии ещё нет.
@@ -20,3 +22,13 @@
 Векторные `figures/overview.svg` и `figures/boundary.svg` построены по этому сохранённому массиву, с подписанными индексами. Они — дополнительные редакционные иллюстрации, не фотография экрана, не внешний датасет и не измерение новых эффектов. Их наличие **не** подменяет ручной browser-review интерактивного HTML.
 
 **Граница воспроизводимости:** по замороженному массиву и сохранённому контракту G2.4 проверяются назначенная маска, предсказание exact runs и confusion counts на данном одном событии. Сама аутентичность чисел в HTML относительно официально загруженного raw-набора отдельно не воспроизводилась в восстановленном builder. Публичная публикация требует нового scoped аудита 05 по конкретному Git SHA и разрешения владельца на публичный URL.
+
+
+## Guided UI revision (2026-11-17)
+
+This branch adds a four-step guided explanation, progressive disclosure and practical examples. The public v1 snapshot SHA-256 above remains historical. New HTML SHA-256: `a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1`. Frozen `source/payload.json` SHA-256: `edc2fe2ea10aa79f14888b0be7e17e81d4b3bfc53e2d40dfe12fe55f1bc763d0`. Numerical payload and original advanced detector-result rendering are preserved; new guided rendering displays the same data and predetermined intervals, not new measurements. The changed HTML requires delta review before merge and release. Practical-use examples are contextual illustrations, not tested application domains.
+
+
+## Audit 05 presentation corrections
+
+Unified advanced Y coordinates and ticks, clipped sample-cell masks, centered freeze region and added horizontally scrollable full-size mobile charts with HTML legends and explicit boundary indices. No numerical payload changes; delta review pending. Current output: `index.html`.

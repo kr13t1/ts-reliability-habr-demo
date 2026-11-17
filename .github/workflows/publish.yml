@@ -3,6 +3,8 @@ name: Public Habr demo (verify and deploy)
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -26,7 +28,19 @@ jobs:
         run: |
           python build_demo.py --check
           python -m unittest discover -p 'test_*.py' -v
-          echo "9d45b2f740415f19d8857beafa0cffd6150748571eb94841744cb085c200a684  index.html" | sha256sum -c -
+          echo "a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1  index.html" | sha256sum -c -
+      - name: Install browser test dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Test guided and advanced UI
+        run: node browser_smoke.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: guided-browser-evidence
+          path: browser-evidence/*.png
+          if-no-files-found: warn
       - name: Stage only public site files
         run: |
           mkdir -p _site/figures
@@ -39,6 +53,7 @@ jobs:
           retention-days: 7
 
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
