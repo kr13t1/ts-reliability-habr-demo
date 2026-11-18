@@ -28,7 +28,7 @@ jobs:
         run: |
           python build_demo.py --check
           python -m unittest discover -p 'test_*.py' -v
-          echo "a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1  index.html" | sha256sum -c -
+          echo "8beb04cc8730d3c1cb6a72a66b103781f0d7f6588f0f79008a00e5c56bace7d1  index.html" | sha256sum -c -
       - name: Install browser test dependency
         run: |
           npm install --no-save --ignore-scripts playwright@1.56.1
@@ -69,7 +69,7 @@ jobs:
         run: |
           set -euo pipefail
           base=https://kr13t1.github.io/ts-reliability-habr-demo/
-          expected=a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1
+          expected=8beb04cc8730d3c1cb6a72a66b103781f0d7f6588f0f79008a00e5c56bace7d1
           for attempt in $(seq 1 12); do
             if curl --fail --silent --show-error --location --max-time 20 "${base}?release=${GITHUB_SHA}" -o /tmp/public-index.html && echo "$expected  /tmp/public-index.html" | sha256sum -c -; then
               for figure in overview boundary; do

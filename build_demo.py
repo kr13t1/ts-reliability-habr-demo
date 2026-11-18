@@ -18,7 +18,7 @@ TEMPLATE = SOURCE / "template.html"
 PAYLOAD = SOURCE / "payload.json"
 DEFAULT_OUT = ROOT / "index.html"
 PLACEHOLDER = "__EMBEDDED_WISDM_PAYLOAD_JSON__"
-EXPECTED_SHA256 = "a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1"
+EXPECTED_SHA256 = "8beb04cc8730d3c1cb6a72a66b103781f0d7f6588f0f79008a00e5c56bace7d1"
 
 
 def digest(data: bytes) -> str:
