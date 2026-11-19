@@ -32,3 +32,7 @@ This branch adds a four-step guided explanation, progressive disclosure and prac
 ## Audit 05 presentation corrections
 
 Unified advanced Y coordinates and ticks, clipped sample-cell masks, centered freeze region and added horizontally scrollable full-size mobile charts with HTML legends and explicit boundary indices. No numerical payload changes; delta review pending. Current output: `index.html`.
+
+
+## Visual revision v3 (pending audit)
+CSS-only editorial palette, typography, spacing and component polish. No JS, payload, chart geometry, controls or measurement changes. v2 HTML SHA256: `a5dbb6cc0fc73e33178d205dad4fc5f2981bde9bdadd841342c1e17e3e59b5b1`; v3 candidate HTML SHA256: `8beb04cc8730d3c1cb6a72a66b103781f0d7f6588f0f79008a00e5c56bace7d1`. Release only after independent visual delta review.
